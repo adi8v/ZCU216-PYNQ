@@ -1,26 +1,29 @@
-# ZCU216-PYNQ
+# Building PYNQ 2.7 for the ZCU216
 
-Board repo for ZCU216 RFSOC. Contains
-
+This repository provides files and instructions for building an SD Card image with PYNQ 2.7 for the ZCU216 evaluation board.
+The repository contains:
+* Instructions
 * ZCU216 board folder with updated device tree. 
 * tics folder with files that program the LMK/LMX PLLs for the ZCU216 RFDCs. 
 
-The user has to also download the prebuilt PYNQ 2.7 rootfs file `https://www.xilinx.com/bin/public/openDownload?filename=focal.aarch64.2.7.0_2021_11_17.tar.gz` as well as the ZCU216 Petalinux 2020.2 BSP from the Xilinx website. 
+## Prequisites for building PYNQ
+1. Setup a machine with Ubuntu 18.04 or 20.04 for building OR setup an equivalent virtual machine by following these instructions: https://pynq.readthedocs.io/en/latest/pynq_sd_card.html#prepare-the-building-environment
+2. Recursively clone this repository: `git clone --recursive https://github.com/UniHD-CEG/ZCU216-PYNQ`
+3. Install dependencies by running the following from the root folder of this repository: `bash PYNQ/sdbuild/scripts/setup_host.sh`
+4. Install Vivado and Vitis 2020.2 from here: https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis/archive-vitis.html
+   1. Note that both Vitis and Vivado are installed at the same time with the same installer.
+   2. Also make sure that the necessary licenses are available to the Vitis installation.
+5. Install PetaLinux 2020.2 by following this guide from step 4 and onwards: https://www.fpgadeveloper.com/how-to-install-petalinux-2020.1/
+   1. IMPORTANT: Make sure to replace '2020.1' with '2020.2' wherever the version number is referenced. This includes the download link!
 
-How to make image. 
+## Prequisites for building PYNQ for the ZCU216 specifically
+1. Download the rootfs from here: https://www.xilinx.com/bin/public/openDownload?filename=focal.aarch64.2.7.0_2021_11_17.tar.gz
+2. Find and Download the ZCU216 Petalinux 2020.2 BSP from here: https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/1065451521/2020.2+Release
+   1. The exact link should be: https://www.xilinx.com/member/forms/download/xef.html?filename=xilinx-zcu216-v2020.2-final.bsp 
+3. Configure the `config.sh` file to match your specific installation.
+   1. Here the paths to the different tools and files, that were downloaded previously, are set.
 
-Method #1: Run the `build_ZCU216.sh` script after changing the path names for the BSP and rootfs files as indicated within the script. This method automatically places the correct tics files into the correct folder as indicated above. It should take about 4 hours to build the board.
-
-Method #2: 
-
-First,
-
-* Place the ZCU216 board folder inside your PYNQ repo in the `boards` folder. Put the ZCU216 Petalinux 2020.2 BSP within that folder. 
-* Place the two tics text files inside your PYNQ repo in the `sdbuild/packages/xrfclk/package/xrfclk` folder, along with the other files that were already there.
-
-Then, from the PYNQ repo in the `sdbuild` folder, run:
-
-`make images PREBUILT=<Path/to/prebuilt/tarball/PYNQ2.7> BOARDS=ZCU216`
-
-Note that this method will attempt to make all the boards in the `PYNQ/boards` folder. If you do not want this to happen, do a local commit of your PYNQ fork after removing the ZCU104 and PYNQ-Z1 board. The PYNQ-Z2 board has to stay as documented here: https://discuss.pynq.io/t/pynq-2-5-2-how-to-disable-synthesis-for-undesired-boards-to-save-time-and-licences/1317 . It should take about 10 hours to build the board.
-
+## Building the SD Card image
+1. Make sure all prequisites have been taken care of.
+2. Execute the build script: `bash build_ZCU216.sh`
+   1. This method automatically places the correct tics files into the correct folder as indicated above. Depending on your system this will take between 1.5 and 4 hours.
