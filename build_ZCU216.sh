@@ -9,16 +9,21 @@ set -x
 echo `date` > runtime.txt
 
 
+# Load the local config
+source config.sh
+
+# Run PYNQ build prequisites from: https://pynq.readthedocs.io/en/latest/pynq_sd_card.html#building-the-image
+source $vitisPath
+source $PetaLinuxPath
+petalinux-util --webtalk off
+
+
 # (2020.2) tools
 
 #source 2020.2.sh
 
 
 export buildroot=`pwd`
-
-# NOTE link to your appropriate files here:
-prebuilt=/home/sara/Downloads/focal.aarch64.2.7.0_2021_11_17.tar.gz
-bsp=/home/sara/Downloads/xilinx-zcu216-v2020.2-final.bsp
 
 if [ ! -e "$prebuilt" ]; then
 
@@ -31,7 +36,7 @@ fi
 
 if [ ! -d "ZCU216-PYNQ" ]; then
 
-    git clone --recursive https://github.com/sarafs1926/ZCU216-PYNQ
+    git clone --recursive https://github.com/UniHD-CEG/ZCU216-PYNQ
 
 fi
 
