@@ -27,3 +27,4 @@ The repository contains:
 1. Make sure all prequisites have been taken care of.
 2. Execute the build script: `bash build_ZCU216.sh`
    1. This method automatically places the correct tics files into the correct folder as indicated above. Depending on your system this will take between 1.5 and 4 hours.
+   2. Note: The build process will run sudo commands about four times during the build. This may require manual insertion of your password.
