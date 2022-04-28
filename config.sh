@@ -4,10 +4,10 @@
 
 
 # Path to the rootfs
-prebuilt=/mnt/NVME_SSD/hendrik/Downloads/focal.aarch64.2.7.0_2021_11_17.tar.gz
+prebuilt=/home/sara/Downloads/focal.aarch64.2.7.0_2021_11_17.tar.gz
 
 # Path to the ZCU216 Petalinux BSP
-bsp=/mnt/NVME_SSD/hendrik/Downloads/xilinx-zcu216-v2020.2-final.bsp
+bsp=/home/sara/Downloads/xilinx-zcu216-v2020.2-final.bsp
 
 # Path to Vitis settings64.sh
 vitisPath=/mnt/NVME_SSD/hendrik/Vivado_2020-2/Vitis/2020.2/settings64.sh

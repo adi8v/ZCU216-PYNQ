@@ -36,7 +36,7 @@ fi
 
 if [ ! -d "ZCU216-PYNQ" ]; then
 
-    git clone --recursive https://github.com/UniHD-CEG/ZCU216-PYNQ
+    git clone --recursive https://github.com/sarafs1926/ZCU216-PYNQ
 
 fi
 
