@@ -4,13 +4,8 @@
 
 
 # Path to the rootfs
-prebuilt=/mnt/NVME_SSD/hendrik/Downloads/focal.aarch64.2.7.0_2021_11_17.tar.gz
+prebuilt=/home/aph/Downloads/focal.aarch64.2.7.0_2021_11_17.tar.gz
 
 # Path to the ZCU216 Petalinux BSP
-bsp=/mnt/NVME_SSD/hendrik/Downloads/xilinx-zcu216-v2020.2-final.bsp
-
-# Path to Vitis settings64.sh
-vitisPath=/mnt/NVME_SSD/hendrik/Vivado_2020-2/Vitis/2020.2/settings64.sh
-
-# Path to PetaLinux settings.sh
-PetaLinuxPath=/mnt/NVME_SSD/hendrik/petalinux/2020.2/settings.sh
+bsp_filename=xilinx-zcu216-v2020.2-final.bsp
+bsp=/home/aph/Downloads/$bsp_filename

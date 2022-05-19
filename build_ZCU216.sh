@@ -13,8 +13,6 @@ echo `date` > runtime.txt
 source config.sh
 
 # Run PYNQ build prequisites from: https://pynq.readthedocs.io/en/latest/pynq_sd_card.html#building-the-image
-source $vitisPath
-source $PetaLinuxPath
 petalinux-util --webtalk off
 
 
@@ -36,14 +34,17 @@ fi
 
 if [ ! -d "ZCU216-PYNQ" ]; then
 
-    git clone --recursive https://github.com/UniHD-CEG/ZCU216-PYNQ
+    git clone --recursive https://github.com/adi8v/ZCU216-PYNQ.git
 
 fi
 
 
 pushd ZCU216-PYNQ/ZCU216
 
-ln -s $bsp
+#if [ ! -e "$bsp_filename" ]; then
+#    pwd
+#    ln -s $bsp
+#fi
 
 popd
 
@@ -54,7 +55,7 @@ pushd ZCU216-PYNQ/PYNQ
 
 echo "" > build.sh
 
-git commit -a -m "clean out build.sh"
+#git commit -a -m "clean out build.sh"
 
 popd
 
@@ -62,6 +63,10 @@ popd
 cp -a ZCU216-PYNQ/tics/. ZCU216-PYNQ/PYNQ/sdbuild/packages/xrfclk/package/xrfclk/
 
 pushd ZCU216-PYNQ/PYNQ/sdbuild
+
+#bash ./scripts/setup_host.sh
+
+#export PATH=/opt/qemu/bin:/opt/crosstool-ng/bin:$PATH
 
 make BOARDDIR=$buildroot/ZCU216-PYNQ PREBUILT=$prebuilt
 
