@@ -32,26 +32,26 @@ if [ ! -e "$prebuilt" ]; then
 fi
 
 
-if [ ! -d "ZCU216-PYNQ" ]; then
+#if [ ! -d "ZCU216-PYNQ" ]; then
+#    echo ZCU216-PYNQ directory not found!
+#    exit 0
+#    git clone --recursive https://github.com/adi8v/ZCU216-PYNQ.git
 
-    git clone --recursive https://github.com/adi8v/ZCU216-PYNQ.git
-
-fi
-
-
-pushd ZCU216-PYNQ/ZCU216
-
-#if [ ! -e "$bsp_filename" ]; then
-#    pwd
-#    ln -s $bsp
 #fi
+
+
+pushd ZCU216
+
+if [ ! -e "$bsp_filename" ]; then
+    pwd
+    ln -s $bsp
+fi
 
 popd
 
-
 # git build.sh so that other boards are not rebuilt
 
-pushd ZCU216-PYNQ/PYNQ
+pushd PYNQ
 
 echo "" > build.sh
 
@@ -60,15 +60,14 @@ echo "" > build.sh
 popd
 
 # move tics files to proper directory
-cp -a ZCU216-PYNQ/tics/. ZCU216-PYNQ/PYNQ/sdbuild/packages/xrfclk/package/xrfclk/
+cp -a tics/. PYNQ/sdbuild/packages/xrfclk/package/xrfclk/
 
-pushd ZCU216-PYNQ/PYNQ/sdbuild
+pushd PYNQ/sdbuild
 
-#bash ./scripts/setup_host.sh
+bash ./scripts/setup_host.sh
+export PATH=/opt/qemu/bin:/opt/crosstool-ng/bin:$PATH
 
-#export PATH=/opt/qemu/bin:/opt/crosstool-ng/bin:$PATH
-
-make BOARDDIR=$buildroot/ZCU216-PYNQ PREBUILT=$prebuilt
+make BOARDDIR=$buildroot PREBUILT=$prebuilt
 
 
 BOARD=ZCU216
